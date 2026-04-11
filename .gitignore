@@ -43,3 +43,7 @@ backups/
 
 # Netdata / monitoring
 var/lib/netdata/
+
+# Local and secret configuration files
+config/*.local.conf
+config/*.secret.conf
