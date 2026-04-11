@@ -1,0 +1,45 @@
+# Secrets
+*.key
+*.pem
+*.env
+.env*
+*.secret
+
+# WireGuard
+wg0.conf
+*.conf
+
+# Logs
+logs/
+*.log
+
+# System files
+*.swp
+*.tmp
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python (si scripts évoluent)
+__pycache__/
+*.pyc
+
+# Node (si frontend plus tard)
+node_modules/
+
+# Docker
+*.pid
+*.sock
+
+# Database
+*.db
+
+# Backup
+backups/
+*.tar
+*.gz
+
+# Netdata / monitoring
+var/lib/netdata/
