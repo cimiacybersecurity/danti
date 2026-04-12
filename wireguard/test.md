@@ -97,4 +97,29 @@ Guarantee:
 * integration monitoring (Netdata)
 * automatic alerts
 
+---
+
+## Test Scheduling
+
+There is a graph of dependencies between tests, the principle of which is that each test has:
+* an id,
+* a description,
+* a possible dependency,
+* a status:
+    - PASS
+    - FAIL
+    - SKIP (if dependency not satisfied)
+ 
+## Test Dependencies
+
+* Failure doesn’t stop everything
+* a test depending on a failed prerequisite becomes SKIP
+* the final report must distinguish:
+    - real failures
+    - non-executable tests
+
+It’s much cleaner than "exit 1" at first glance.
+
+---
+
 CIMIA CYBERSECURITY, a cybersecurity empire
