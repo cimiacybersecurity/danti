@@ -23,13 +23,13 @@ The WireGuard server:
 
 ## Addressing Plan
 
-< CONFIDENTIAL >
+Defined in the external YAML configuration
 
 ---
 
 ## Basic Setup
 
-< CONFIDENTIAL >
+Defined in the external YAML configuration
 
 ---
 
@@ -46,18 +46,18 @@ The WireGuard server:
 
 **Main Script:** wireguard.sh
 
-### Available Orders
+### Available Commands
 
-| Order     | Description     |
-|-----------|-----------------|
-| -s -i     | Deploy server   |
-| -s -S     | Server status   |
-| -s -t     | Test a server   |
-| -c -i     | Deploy client   |
-| -c -S     | Client status   |
-| -c -t     | Test a client   |
-| --genkeys | Generate keys   |
-| -peer-add | Add peer        |
+| Order      | Description     |
+|------------|-----------------|
+| -s -i      | Deploy server   |
+| -s -S      | Server status   |
+| -s -t      | Test a server   |
+| -c -i      | Deploy client   |
+| -c -S      | Client status   |
+| -c -t      | Test a client   |
+| --genkeys  | Generate keys   |
+| --peer-add | Add peer        |
 
 ---
 
@@ -108,6 +108,10 @@ Each peer has:
 WireGuard is used here as:
 - secure network layer
 - foundation of private infrastructure
+
+---
+
+## Source Configuration
 
 ---
 
