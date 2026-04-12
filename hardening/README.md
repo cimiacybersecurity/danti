@@ -4,6 +4,8 @@
 
 Harden systems to reduce the attack surface and improve resilience against threats.
 
+> hardening.sh does not deploy WireGuard but may check it deployment.
+
 ---
 
 ## Principles
@@ -113,4 +115,10 @@ Hardening is:
 
 ---
 
+## Safety guards
+
+* No destructive application without pre-checks.
+* Do not cut off remote access if the alternative route is not validated.
+
+---
 CIMIA CYBERSECURITY, a cybersecurity empire!
