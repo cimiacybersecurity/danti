@@ -6,7 +6,7 @@ DANTI - Deployment Automation for Network &amp; Threat Infrastructure - is a mod
 
 This repository contains all the scripts, configurations and documentation necessary for the deployment, security and operation of the CIMIA CYBERSECURITY infrastructure.
 
-The goal is to build a modular, secure, reproducible and evolutionary infrastructure.
+The goal is to build a modular, secure, reproducible and evolving infrastructure.
 
 ---
 
@@ -19,7 +19,7 @@ The goal is to build a modular, secure, reproducible and evolutionary infrastruc
 | Front-end        | Reverse proxy, public access, exposed services |
 | AI server        | Model hosting (Ollama, GPU)                    |
 | (Future) Bastion | Centralized secure access                      |
-| Customers        | Administration machines, users                 |
+| Clients          | Administration machines, users                 |
 
 ---
 
@@ -55,7 +55,7 @@ Internet -> [ Frontend ] -> (WireGuard VPN) -> [ IA Server ] --- [ Admin Machine
 
 ## Repository Structure
 
-infra/
+danti/
 
 ├── README.md
 
@@ -113,5 +113,11 @@ This infrastructure is designed to evolve towards:
 - a secure production environment
 
 ---
+
+## Configuration model
+
+* YAML
+* local secrets
+* public reopsitory
 
 CIMIA CYBERSECURITY, a cybersecurity empire!
