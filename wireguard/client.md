@@ -15,31 +15,37 @@ Connect a machine to the WireGuard VPN in order to access internal resources.
 
 ---
 
+## Configuration
+
+Remember to modify the YAML file to give information needed about the device.
+
+---
+
 ## Installation
 
 ```bash
-./wireguard.sh --client --install
+./wireguard.sh --client --install --device <clientTarget>
 ```
 
 ---
 
-## Fichiers générésç
+## Generated file
 
 /etc/wireguard/wg0.conf
 
 ---
 
-## Fonctionnement
+## Operation
 
-Le client :
+The client:
 
-* établit un tunnel chiffré vers le serveur
-* accède uniquement au réseau VPN
-* ne redirige pas le trafic Internet
+* establishes an encrypted tunnel to the server,
+* only accesses the VPN network,
+* does not redirect Internet traffic.
 
 ---
 
-## Démarrage
+### Start
 
 ```bash
 systemctl enable wg-quick@<interface>
@@ -48,27 +54,27 @@ systemctl start wg-quick@<interface>
 
 ---
 
-## Vérification
+### Check
 
 ```bash
-./wireguard.sh --client --status
+./wireguard.sh --client --status  --device <clientTarget>
 ```
 
 ---
 
-## Test
+### Test
 
 ```bash
-./wireguard.sh --client --test
+./wireguard.sh --client --test  --device <clientTarget>
 ```
 
 ---
 
-## Remarques
+### Notes
 
-* pas de full tunnel
-* configuration minimale
-* accès restreint au VPN uniquement
+* no full tunnel
+* minimum configuration
+* Restricted VPN access only
 
 ---
 
