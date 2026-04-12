@@ -127,8 +127,6 @@ If a dependency fails, dependent tests must be marked as **SKIP**, not **FAIL**.
 
 ---
 
-**> /!\ RELIRE CE QUI SUIT !!!!**
-
 ## Test groups
 
 ### Group A - Local prerequisites (independent)
