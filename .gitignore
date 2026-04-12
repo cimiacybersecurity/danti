@@ -1,10 +1,3 @@
-# Secrets
-*.key
-*.pem
-*.env
-.env*
-*.secret
-
 # Logs
 logs/
 *.log
@@ -41,7 +34,23 @@ backups/
 var/lib/netdata/
 
 # Real generated configs
-#/etc/wireguard/*
 # Local and secret configuration files
 config/*.local.yaml
 config/*.secret.yaml
+
+# Generated local assets
+secrets/
+generated/
+keys/
+*.key
+*.pem
+*.secret
+*.env
+.env*
+
+# Editors / temp
+*.swp
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
