@@ -15,12 +15,18 @@ Deploy a secure WireGuard server to serve as the central VPN point.
 
 ---
 
+## Configuration
+
+You have to define the server configuration in the YAML configuration file.
+
+---
+
 ## Installation
 
 The deployment is carried out via:
 
 ```bash
-./wireguard.sh --server --install
+./wireguard.sh --server --install --device <serverID>
 ```
 
 ---
@@ -33,14 +39,14 @@ The deployment is carried out via:
 
 ├── public.key
 
-├── <interface>. conf
+├── <interface>.conf
 
 ---
 
 ## Security
 
 * Strict key permissions
-* No direct exposure on the Internet (excluding VPN port).
+* Internet access blocked (excluding VPN port).
 * No default enabled internet routing.
 
 ---
@@ -54,9 +60,9 @@ systemctl start wg-quick@<interface>
 
 ## Verification
 
-``bash
-./wireguard.sh --server --status
-``
+```bash
+./wireguard.sh --server --status --device <serverID>
+```
 
 ---
 
