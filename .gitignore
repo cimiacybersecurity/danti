@@ -5,10 +5,6 @@
 .env*
 *.secret
 
-# WireGuard
-wg0.conf
-*.conf
-
 # Logs
 logs/
 *.log
@@ -44,6 +40,8 @@ backups/
 # Netdata / monitoring
 var/lib/netdata/
 
+# Real generated configs
+#/etc/wireguard/*
 # Local and secret configuration files
-config/*.local.conf
-config/*.secret.conf
+config/*.local.yaml
+config/*.secret.yaml
