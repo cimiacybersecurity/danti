@@ -48,16 +48,17 @@ Defined in the external YAML configuration
 
 ### Available Commands
 
-| Order      | Description     |
-|------------|-----------------|
-| -s -i      | Deploy server   |
-| -s -S      | Server status   |
-| -s -t      | Test a server   |
-| -c -i      | Deploy client   |
-| -c -S      | Client status   |
-| -c -t      | Test a client   |
-| --genkeys  | Generate keys   |
-| --peer-add | Add peer        |
+| Command    | Description         |
+|------------|---------------------|
+| -s -i      | Deploy server       |
+| -s -S      | Server status       |
+| -s -t      | Test a server       |
+| -c -i      | Deploy client       |
+| -c -S      | Client status       |
+| -c -t      | Test a client       |
+| --genkeys  | Generate keys       |
+| --peer-add | Add peer            |
+| --device   | The device targeted |
 
 ---
 
@@ -111,7 +112,60 @@ WireGuard is used here as:
 
 ---
 
-## Source Configuration
+## Configuration source
+
+WireGuard deployment is driven by the external YAML configuration file.
+
+The repository only provides:
+- a public example configuration file
+- the expected schema
+- the deployment logic
+
+For security reasons, real infrastructure values must be defined outside the public repository, in a local configuration file.
+
+Typical usage:
+
+```bash
+./wireguard.sh --server --install --config config/infrastructure.local.yaml --device front
+```
+
+The selected --device determines:
+* the machine role
+* interface names
+* VPN addressing
+* peer definitions
+* service-specific behavior
+* …
+
+---
+
+## hub-and-spoke topology
+
+### What it is
+
+The current WireGuard design follows a **hub-and-spoke** topology.
+
+* A central node = **hub**  
+* Several peripheral nodes = **spokes**
+
+- the VPN server acts as the central hub
+- each client acts as a spoke
+- clients connect to the server, not directly to each other by default
+
+This model simplifies:
+- peer management
+- access control
+- routing logic
+- future infrastructure growth
+
+It also allows the central server to enforce network policy while keeping client configurations minimal.
+
+### Why is it good
+
+- simple to reason,
+- easy to upgrade,
+- There’s no need for all the clients to know each other,
+- centralized control.
 
 ---
 
