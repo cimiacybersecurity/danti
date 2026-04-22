@@ -4,7 +4,9 @@
 
 Harden systems to reduce the attack surface and improve resilience against threats.
 
-> hardening.sh does not deploy WireGuard but may check it deployment.
+> hardening.sh does not deploy WireGuard but checks its deployment.
+
+For Information: time synchronization on devices is part of hardening, and this hardening uses a safety-first apply model.
 
 ---
 
@@ -121,4 +123,11 @@ Hardening is:
 * Do not cut off remote access if the alternative route is not validated.
 
 ---
+
+## Roadmap
+
+PAM/TOTP hooks may be deployed later.
+
+---
+
 CIMIA CYBERSECURITY, a cybersecurity empire!
