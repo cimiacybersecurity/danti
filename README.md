@@ -2,6 +2,10 @@
 
 DANTI - Deployment Automation for Network &amp; Threat Infrastructure - is a modular infrastructure automation framework by CIMIA CYBERSECURITY, designed to deploy, secure, and manage resilient systems. It integrates VPN, hardening, monitoring, and security tools to build scalable and controlled environments.
 
+## Pay attention
+
+A configuration file must fulfilled to use this program to seperate source code and configuration. This design have been choosed for cybresecurity reasons, use easily this program and deploy easily all solutions regardless of the infrastructure.
+
 ## Goal
 
 This repository contains all the scripts, configurations and documentation necessary for the deployment, security and operation of the CIMIA CYBERSECURITY infrastructure.
