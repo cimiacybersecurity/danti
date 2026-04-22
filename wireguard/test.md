@@ -2,7 +2,7 @@
 
 ## Goal
 
-Verify that WireGuard is properly installed and functional.
+Verify that WireGuard is correctly installed, correctly configured, and effectively operational.
 
 ---
 
@@ -110,6 +110,25 @@ Tests are executed in a **dependency-aware** order. There is a graph of dependen
     - non-executable tests
 
 It’s much cleaner than "exit 1" at first glance.
+
+---
+
+## Execution model
+
+Tests are executed in a **dependency-aware** order.
+
+A failing test **must not** stop the whole test suite, unless a later test explicitly depends on it.
+
+Each test returns one of the following statuses:
+
+- **PASS**: the control succeeded
+- **FAIL**: the control failed
+- **SKIP**: the control was not executed because one or more required prerequisites were not satisfied
+
+This allows the script to:
+- continue testing independent components
+- avoid meaningless follow-up checks
+- provide a precise diagnostic report
 
 ---
 
