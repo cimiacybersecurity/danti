@@ -1,61 +1,68 @@
 # ROADMAP
 
-## Objective
+## Legend
 
-Track what has been completed, what is in progress, and what remains to be implemented in DANTI.
-
----
-
-## Current status
-
-### Completed
-- Global repository structure defined
-- Core documentation initialized
-- Separation of deployment and hardening logic validated
-- YAML-based configuration model selected
-- WireGuard testing dependency model defined
-
-### In progress
-- WireGuard documentation refinement
-- Configuration schema design (`config.example.yaml`)
-
-### Next steps
-1. Finalize `config.example.yaml`
-2. Implement `wireguard.sh`
-   - `--genkeys`
-   - `--server --install`
-   - `--server --status`
-   - `--server --test`
-   - `--peer-add`
-3. Implement client logic in `wireguard.sh`
-4. Define `hardening.sh` scope and safety guards
-5. Implement baseline SSH hardening
-6. Implement time synchronization checks
-7. Implement PAM/TOTP hardening
-8. Implement firewall logic in `hardening.sh`
-9. Implement backup module
-10. Implement Netdata module
-11. Implement Fail2Ban module
-12. Implement Wazuh/OSSEC integration
+- ✅ Done
+- ⬜ Planned
+- 🧠 Under design / to be refined
+- 🚧 In progress
+- ⚠️ Blocked / sensitive
+- 🔐 Security-critical
+- 🧪 Testing-related
 
 ---
 
-## Design principles
+## Repository and architecture
 
-- One script per module
-- Shared YAML configuration
-- Public code, private real configuration
-- Local generation of private secrets whenever possible
-- Dependency-aware tests
-- No destructive hardening without validated fallback access
+- ✅ Global repository structure defined
+- ✅ Separation between deployment and hardening validated
+- ✅ Public repository / private configuration model validated
+- ✅ YAML-based configuration model selected
+- 🚧 Module documentation refinement
+- ⬜ Finalize `config.example.yaml`
 
 ---
 
-## Longer-term goals
-- Mini in-house orchestrator
-- Bastion host
-- Centralized secret handling
-- Advanced monitoring and SIEM integration
-- Infrastructure compliance scoring
+## WireGuard
 
-CIMIA CYBERSECURITY, a Cybersecurity empire.
+- ✅ WireGuard module scope defined
+- 🚧 CLI command model defined
+- ✅ Test dependency model defined
+- ✅ Server assumptions validated
+- ⬜ Write `wireguard.sh`
+- ⬜ Implement `--genkeys`
+- ⬜ Implement `--server --install`
+- ⬜ Implement `--server --status`
+- ⬜ Implement `--server --test`
+- ⬜ Implement `--peer-add`
+- ⬜ Implement client logic
+- 🧪 Add advanced connectivity tests
+
+---
+
+## Hardening
+
+- ⬜ Hardening kept separate from deployment
+- ⬜ Hardening must verify WireGuard without deploying it
+- ⬜ SSH hardening direction validated
+- ⬜ Full Ed25519 selected
+- ⬜ Full curve25519-sha256 selected
+- ⬜ Full chacha20-poly1305@openssh.com selected
+- ⬜ PAM kept enabled
+- ⬜ Implement time synchronization checks
+- ⬜ Implement SSH hardening
+- ⬜ Implement access safety guards
+- 🔐 Prevent lockout during hardening apply
+- 🧠 Define PAM/TOTP integration details
+- 🧠 Define SSH certificate workflow
+
+---
+
+## Operations
+
+- 🧠 Design local secret generation workflow
+- 🧠 Design mini in-house orchestrator model
+- ⬜ Backup module
+- ⬜ Netdata module
+- ⬜ Fail2Ban module
+- ⬜ Wazuh / OSSEC integration
