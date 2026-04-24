@@ -170,4 +170,30 @@ Secrets should be:
 
 ---
 
+## Preflight check policy
+
+Every deployment module must run preflight checks before applying changes.
+
+Preflight checks are designed to:
+- detect existing installations
+- identify port, route, service or configuration conflicts
+- prevent accidental overwrites
+- warn the operator before modifying a system
+- avoid breaking remote access
+
+If the platform is clean, the deployment may continue automatically.
+
+If warnings are detected, the script must display a detailed report and ask for confirmation, unless `--yes` is explicitly provided.
+
+If blocking conflicts are detected, the deployment must stop. DANTI does not provide a `--force` option by design.
+
+### Warning vs blocking conflict
+
+| Type                | Signification                                            | Exemple                                                                                              | Comportement         |
+|---------------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------|
+| `warning`           |	situation suspecte mais pas forcément dangereuse         | `wg` déjà installé, paquet présent, dossier `/etc/wireguard` existe mais sans config active.         | confirmation requise |
+| `blocking conflict` |	continuer pourrait casser ou écraser une infra existante | `wg0` active, `/etc/wireguard/wg0.conf` existant, port 51820 déjà utilisé, service actif avec peers  | arrêt obligatoire    |
+
+---
+
 CIMIA CYBERSECURITY, a cybersecurity empire!
