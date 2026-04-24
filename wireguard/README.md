@@ -14,6 +14,8 @@ The program is designed to deploy wireguard as a server or a client according to
 
 ## Architecture
 
+The type of device is defined in configuration files.
+
 ### Server Role
 
 The WireGuard server:
@@ -53,7 +55,7 @@ Defined in the external YAML configuration
 | Command                | Description                                           |
 |------------------------|-------------------------------------------------------|
 | -i / --install         | Install wireguard on the target.                      |
-| -S / --status          | Generate the status of the targeted asset.            |
+| -s / --status          | Generate the status of the targeted asset.            |
 | -t / --test            | Test the targeted asset.                              |
 | --genkeys              | Generate keys.                                        |
 | --peer-add             | Add peer.                                             |
@@ -63,7 +65,8 @@ Defined in the external YAML configuration
 | -l / --log-file [PATH] | Path to log wireguard.sh execution.                   |
 | -q / --quiet           | Only print if an interaction with the user is needed. |
 | -h / --help            | Print help.                                           |
-| --dry-run              | Dry running of wireguard.sh                           |
+| --dry-run              | Dry running of wireguard.sh.                          |
+| -c / --check           | Check the device before installation.                 |
 
 ---
 
