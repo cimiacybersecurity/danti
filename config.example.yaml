@@ -6,7 +6,6 @@ metadata:
 
 logging:
   output: "console"        # console | file | both | quiet
-  #format: "text"           # text | jsonl
   file: "logs/danti.log"
   level: "info"            # debug | info | warn | error
 
