@@ -1,0 +1,254 @@
+metadata:
+  project: "DANTI - Deployment Automation for Network and Threat Infrastructure"
+  organization: "CIMIA CYBERSECURITY"
+  version: "0.1"
+  timezone: "America/Martinique"
+
+logging:
+  output: "console"        # console | file | both | quiet
+  #format: "text"           # text | jsonl
+  file: "logs/danti.log"
+  level: "info"            # debug | info | warn | error
+
+defaults:
+  ssh:
+    port: 1622
+    user: "debian"
+    identity_file: "~/.ssh/id_ed25519"
+    host_key_types:
+      - "ed25519"
+    ciphers:
+      - "chacha20-poly1305@openssh.com"
+    macs:
+      - "hmac-sha2-512-etm@openssh.com"
+      #- "hmac-sha2-512"
+    kex_algorithms:
+      - "curve25519-sha256"
+    use_pam: true
+    x11_forwarding: false
+    permit_root_login: false
+    pubkey_authentication: true
+    password_authentication: true
+    kbd_interactive_authentication: false
+    client_alive_interval: 30
+    client_alive_count_max: 3
+    accept_env:
+      - "LANG"
+      - "LC_*"
+      - "COLORTERM"
+      - "NO_COLOR"
+
+  wireguard:
+    iface: "wg0"
+    port: 51820
+    subnet: "10.66.0.0/24"
+    full_tunnel: false
+    enable_nat: false
+    enable_ip_forwarding: false
+    config_dir: "/etc/wireguard"
+    private_key_path: "/etc/wireguard/private.key"
+    public_key_path: "/etc/wireguard/public.key"
+
+  hardening:
+    enable_time_sync: true
+    time_sync_service: "chrony"      # chrony | systemd-timesyncd
+    enable_totp: true
+    enable_ssh_certificates: true
+    enable_pam_security_hooks: true
+    enable_access_time_restrictions: true
+    safe_apply: true
+    require_vpn_before_ssh_restriction: true
+
+network_policies:
+  default:
+    inbound_policy: "deny"
+    outbound_policy: "allow"
+
+devices:
+  front:
+    hostname: "front"
+    role: "frontend"
+    os:
+      family: "debian"
+      version: "13"
+
+    network:
+      interfaces:
+        public:
+          name: "eth0"
+          type: "public"
+          ssh_allowed: false
+          https_allowed: true
+          wireguard_allowed: true
+
+        vpn:
+          name: "wg0"
+          type: "vpn"
+          address: "10.66.0.1/24"
+          ssh_allowed: true
+          https_allowed: false
+          wireguard_allowed: false
+
+      allowed_flows:
+        - source: "vpn"
+          destination: "local"
+          service: "ssh"
+        - source: "public"
+          destination: "local"
+          service: "wireguard"
+        - source: "public"
+          destination: "local"
+          service: "https"
+
+    services:
+      ssh:
+        enabled: true
+        role: "server"
+        bind_interfaces:
+          - "vpn"
+
+      wireguard:
+        enabled: true
+        role: "server"
+        interface: "wg0"
+        address: "10.66.0.1/24"
+        listen_port: 51820
+        peers:
+          - name: "ia-gpu"
+            address: "10.66.0.2/32"
+            public_key: "REPLACE_ME"
+          - name: "admin-laptop"
+            address: "10.66.0.3/32"
+            public_key: "REPLACE_ME"
+
+      reverse_proxy:
+        enabled: true
+        role: "server"
+        bind_interfaces:
+          - "public"
+
+  ia-gpu:
+    hostname: "ia-gpu"
+    role: "ai"
+    os:
+      family: "debian"
+      version: "13"
+
+    network:
+      interfaces:
+        lan:
+          name: "eth0"
+          type: "lan"
+          ssh_allowed: false
+          https_allowed: false
+          wireguard_allowed: false
+
+        vpn:
+          name: "wg0"
+          type: "vpn"
+          address: "10.66.0.2/24"
+          ssh_allowed: true
+          https_allowed: false
+          wireguard_allowed: false
+
+        local:
+          name: "lo"
+          type: "local"
+
+      allowed_flows:
+        - source: "vpn"
+          destination: "local"
+          service: "ssh"
+        - source: "vpn"
+          destination: "local"
+          service: "ollama"
+        - source: "local"
+          destination: "local"
+          service: "ollama"
+
+    services:
+      ssh:
+        enabled: true
+        role: "server"
+        bind_interfaces:
+          - "vpn"
+          - "local"
+
+      wireguard:
+        enabled: true
+        role: "client"
+        interface: "wg0"
+        address: "10.66.0.2/24"
+        server_public_key: "REPLACE_ME"
+        server_endpoint: "vpn.example.org:51820"
+        allowed_ips:
+          - "10.66.0.0/24"
+        persistent_keepalive: 25
+
+      ollama:
+        enabled: true
+        role: "server"
+        bind_interfaces:
+          - "vpn"
+          - "local"
+        port: 11434
+
+  admin-laptop:
+    hostname: "admin-laptop"
+    role: "admin"
+    os:
+      family: "linux"
+      version: "generic"
+
+    network:
+      interfaces:
+        vpn:
+          name: "wg0"
+          type: "vpn"
+          address: "10.66.0.3/24"
+          ssh_allowed: true
+          wireguard_allowed: false
+
+      allowed_flows:
+        - source: "vpn"
+          destination: "vpn"
+          service: "ssh"
+        - source: "vpn"
+          destination: "vpn"
+          service: "wireguard"
+
+    services:
+      wireguard:
+        enabled: true
+        role: "client"
+        interface: "wg0"
+        address: "10.66.0.3/24"
+        server_public_key: "REPLACE_ME"
+        server_endpoint: "vpn.example.org:51820"
+        allowed_ips:
+          - "10.66.0.0/24"
+        persistent_keepalive: 25
+
+      ssh:
+        enabled: true
+        role: "client"
+
+deployment:
+  preflight:
+    enabled: true
+    require_confirmation_on_collision: true
+    allow_non_interactive_with_yes: true
+    collision_checks:
+      - "existing_wireguard_interface"
+      - "existing_wireguard_config"
+      - "existing_wireguard_service"
+      - "existing_vpn_software"
+      - "port_conflicts"
+      - "route_conflicts"
+      - "key_conflicts"
+
+  secrets:
+    generate_private_keys_on_target: true
+    export_public_keys_only: true
+    local_secret_directory: "secrets/"
+    commit_secrets_to_git: false
