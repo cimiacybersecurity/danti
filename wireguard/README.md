@@ -8,6 +8,8 @@ Set up a secure VPN that allows:
 - the secure administration of machines
 - the protection of internal services
 
+The program is designed to deploy wireguard as a server or a client according to the command line executed.
+
 ---
 
 ## Architecture
@@ -48,17 +50,20 @@ Defined in the external YAML configuration
 
 ### Available Commands
 
-| Command    | Description         |
-|------------|---------------------|
-| -s -i      | Deploy server       |
-| -s -S      | Server status       |
-| -s -t      | Test a server       |
-| -c -i      | Deploy client       |
-| -c -S      | Client status       |
-| -c -t      | Test a client       |
-| --genkeys  | Generate keys       |
-| --peer-add | Add peer            |
-| --device   | The device targeted |
+| Command                | Description                                           |
+|------------------------|-------------------------------------------------------|
+| -i / --install         | Install wireguard on the target.                      |
+| -S / --status          | Generate the status of the targeted asset.            |
+| -t / --test            | Test the targeted asset.                              |
+| --genkeys              | Generate keys.                                        |
+| --peer-add             | Add peer.                                             |
+| --device [ID]          | The targeted device.                                  |
+| --config [PATH]        | The configuration file path.                          |
+| --yes                  | Automatically confirm the installation after checking |
+| -l / --log-file [PATH] | Path to log wireguard.sh execution.                   |
+| -q / --quiet           | Only print if an interaction with the user is needed. |
+| -h / --help            | Print help.                                           |
+| --dry-run              | Dry running of wireguard.sh                           |
 
 ---
 
