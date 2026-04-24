@@ -6,6 +6,30 @@ DANTI - Deployment Automation for Network &amp; Threat Infrastructure - is a mod
 
 A configuration file must fulfilled to use this program to seperate source code and configuration. This design have been choosed for cybresecurity reasons, use easily this program and deploy easily all solutions regardless of the infrastructure.
 
+---
+
+## Public repository policy
+
+This repository is public by design.
+
+It contains:
+- reusable infrastructure code
+- generic deployment logic
+- documentation
+- example configuration files
+
+*⚠️ The repository must never contain*:
+- real IP addresses
+- real domain-specific internal topology
+- private keys
+- production credentials
+- live hostnames tied to sensitive systems
+- real local configuration files
+
+The public repository documents the framework, not the live infrastructure.
+
+---
+
 ## Goal
 
 This repository contains all the scripts, configurations and documentation necessary for the deployment, security and operation of the CIMIA CYBERSECURITY infrastructure.
@@ -123,5 +147,27 @@ This infrastructure is designed to evolve towards:
 * YAML
 * local secrets
 * public reopsitory
+
+---
+
+## Secrets policy
+
+Secrets must never be committed to the public repository.
+
+This includes:
+- private SSH keys
+- WireGuard private keys
+- API tokens
+- passwords
+- production certificates
+- real environment files
+
+Secrets should be:
+- generated locally on the target machines whenever possible
+- stored outside the public repository
+- injected at deployment time from a trusted administration machine
+- referenced through local configuration files excluded from version control
+
+---
 
 CIMIA CYBERSECURITY, a cybersecurity empire!
