@@ -1,5 +1,7 @@
 # WireGuard - VPN Infrastructure
 
+The program deploys WireGuard as a server or a client according to the selected device.
+
 ## Goal
 
 Set up a secure VPN that allows:
@@ -8,7 +10,7 @@ Set up a secure VPN that allows:
 - the secure administration of machines
 - the protection of internal services
 
-The program is designed to deploy wireguard as a server or a client according to the command line executed.
+The program is designed to deploy WireGuard as a server or a client according to the command line executed.
 
 ---
 
@@ -54,7 +56,7 @@ Defined in the external YAML configuration
 
 | Command                | Description                                           |
 |------------------------|-------------------------------------------------------|
-| -i / --install         | Install wireguard on the target.                      |
+| -i / --install         | Install WireGuard on the target.                      |
 | -s / --status          | Generate the status of the targeted asset.            |
 | -t / --test            | Test the targeted asset.                              |
 | --genkeys              | Generate keys.                                        |
@@ -134,7 +136,13 @@ For security reasons, real infrastructure values must be defined outside the pub
 Typical usage:
 
 ```bash
-./wireguard.sh --server --install --config config/infrastructure.local.yaml --device front
+./wireguard.sh --install --config conf/ --device front
+```
+
+or
+
+```bash
+./wireguard.sh -id front --config conf/
 ```
 
 The selected --device determines:
@@ -170,9 +178,9 @@ It also allows the central server to enforce network policy while keeping client
 
 ### Why is it good
 
-- simple to reason,
-- easy to upgrade,
-- There’s no need for all the clients to know each other,
+- simple to reason about,
+- easy to extend,
+- There is no need for all the clients to know each other,
 - centralized control.
 
 ---
