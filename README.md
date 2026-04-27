@@ -4,7 +4,7 @@ DANTI - Deployment Automation for Network &amp; Threat Infrastructure - is a mod
 
 ## Pay attention
 
-A configuration file must fulfilled to use this program to seperate source code and configuration. This design have been choosed for cybresecurity reasons, use easily this program and deploy easily all solutions regardless of the infrastructure.
+A configuration file must be fulfilled to use this program to seperate source code and configuration. This design improves security, portability and deployment reproducibility across different infrastructures. Public configuration files describe the framework, expected schemas and reusable logic. Real infrastructure values must be stored in local configuration files excluded from version control.
 
 ---
 
@@ -144,9 +144,29 @@ This infrastructure is designed to evolve towards:
 
 ## Configuration model
 
-* YAML
-* local secrets
-* public reopsitory
+DANTI is driven by YAML configuration files.
+
+The configuration model may be provided as:
+- a single YAML file
+- a configuration directory containing multiple YAML files
+
+The selected target is identified with `--device`.
+
+Example:
+
+```bash
+./wireguard/wireguard.sh --install --device front --config conf/
+```
+
+The configuration defines:
+
+* devices
+* roles
+* network interfaces
+* services
+* allowed flows
+* other hardening policies
+* deployment behavior
 
 ---
 
@@ -193,6 +213,29 @@ If blocking conflicts are detected, the deployment must stop. DANTI does not pro
 |---------------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------|
 | `warning`           |	situation suspecte mais pas forcément dangereuse         | `wg` déjà installé, paquet présent, dossier `/etc/wireguard` existe mais sans config active.         | confirmation requise |
 | `blocking conflict` |	continuer pourrait casser ou écraser une infra existante | `wg0` active, `/etc/wireguard/wg0.conf` existant, port 51820 déjà utilisé, service actif avec peers  | arrêt obligatoire    |
+
+---
+
+## Logging policy
+
+DANTI uses two logging formats:
+
+- human-readable logs on the terminal
+- JSON Lines logs in files
+
+By default, logs are displayed on the terminal only.
+
+If `-l` or `--log-file` is provided, logs are also written to the selected file in JSONL format.
+
+If `-q` or `--quiet` is provided, non-interactive terminal output is disabled. Interactive prompts are still displayed.
+
+Examples:
+
+```bash
+./wireguard.sh --install --device front
+./wireguard.sh --install --device front --log-file logs/wireguard.jsonl
+./wireguard.sh --install --device front --quiet --log-file logs/wireguard.jsonl
+```
 
 ---
 
