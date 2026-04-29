@@ -1,12 +1,16 @@
 # Logs
-logs/
+var/logs/
+# Logs anywhere, as defense in depth
 *.log
 *.jsonl
+# Generated secrets and deployment artifacts
+var/secrets/
+var/generated/
+var/keys/
 
 # System files
 *.swp
 *.tmp
-*.bak
 
 # OS
 .DS_Store
@@ -26,29 +30,31 @@ node_modules/
 # Database
 *.db
 
-# Backup
-backups/
+# Backups / archives
 *.tar
 *.gz
+*.zip
+*.bak
 
 # Netdata / monitoring
 var/lib/netdata/
 
 # Real generated configs
 # Local and secret configuration files
-conf/*.local.yaml
-conf/*.secret.yaml
-conf/local/
-conf/secrets/
-
-# Generated secrets and deployment artifacts
-secrets/
-generated/
-keys/
+etc/*.local.yaml
+etc/*.secret.yaml
+etc/local/
+etc/secrets/
 
 # Editors / temp
 *.swp
 *.tmp
-*.bak
 .DS_Store
 Thumbs.db
+
+# Secrets anywhere, as defense in depth
+*.key
+*.pem
+*.secret
+*.env
+.env*
