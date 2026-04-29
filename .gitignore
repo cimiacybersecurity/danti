@@ -1,6 +1,7 @@
 # Logs
 logs/
 *.log
+*.jsonl
 
 # System files
 *.swp
@@ -35,18 +36,15 @@ var/lib/netdata/
 
 # Real generated configs
 # Local and secret configuration files
-config/*.local.yaml
-config/*.secret.yaml
+conf/*.local.yaml
+conf/*.secret.yaml
+conf/local/
+conf/secrets/
 
-# Generated local assets
+# Generated secrets and deployment artifacts
 secrets/
 generated/
 keys/
-*.key
-*.pem
-*.secret
-*.env
-.env*
 
 # Editors / temp
 *.swp
