@@ -239,4 +239,22 @@ Examples:
 
 ---
 
+## Local secrets workflow
+
+DANTI follows a local-secret-first approach.
+Private secrets should be generated on the target machines whenever possible.
+Secrets must be stored under:
+
+```text
+var/secrets/
+var/keys/
+var/generated/
+```
+
+Private keys must never be committed.
+Public keys may be exported and shared between machines when required by the deployment workflow.
+The administration machine may orchestrate deployments, collect public keys, and distribute public configuration, but it should not centralize private secrets unless explicitly required.
+
+---
+
 CIMIA CYBERSECURITY, a cybersecurity empire!
